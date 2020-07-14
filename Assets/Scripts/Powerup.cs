@@ -4,24 +4,17 @@ using UnityEngine;
 
 public class Powerup : MonoBehaviour
 {
-    [SerializeField]
-    private float _speed = 3.0f;
-    [SerializeField]
-    private int _powerupID;
-    [SerializeField]
-    private AudioClip _clip;
+    [SerializeField] private float _speed = 3.0f;
+    [SerializeField] private int _powerupID;
+    [SerializeField] private AudioClip _clip;
 
-        
-    // Start is called before the first frame update
-    void Start()
+    void Start() // Start is called before the first frame update
     {
         // Start the PowerUp in this position
         float randomX = Random.Range(-9.0f, 9.0f);
         transform.position = new Vector3(randomX, 7.0f, 0);
     }
-
-    // Update is called once per frame
-    void Update()
+    void Update() // Update is called once per frame
     {
         // Move down at a speed of 3 (adjustable in the inspector)
         transform.Translate(Vector3.down * _speed * Time.deltaTime);

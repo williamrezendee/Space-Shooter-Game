@@ -4,44 +4,28 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField]
-    private float _speed = 4.0f;
-    [SerializeField]
-    private GameObject _laserPrefab;
-    [SerializeField]
-    private GameObject _tripleShotPrefab;
-    [SerializeField]
-    private GameObject _shieldsVisualizer;
-    [SerializeField]
-    private GameObject _fireDamageLeft;
-    [SerializeField]
-    private GameObject _fireDamageRight;
-    [SerializeField]
-    private AudioClip _laserSoundClip;
-    private AudioSource _audioSource;
-    [SerializeField]
-    private GameObject _explosionPrefab;
-
-    [SerializeField]
-    private float _fireRate = 1f;
+    [SerializeField] private float _speed = 4.0f;
+    [SerializeField] private GameObject _laserPrefab;
+    [SerializeField] private GameObject _tripleShotPrefab;
+    [SerializeField] private GameObject _shieldsVisualizer;
+    [SerializeField] private GameObject _fireDamageLeft;
+    [SerializeField] private GameObject _fireDamageRight;
+    [SerializeField] private AudioClip _laserSoundClip;
+    [SerializeField] private GameObject _explosionPrefab;
+    [SerializeField] private float _fireRate = 1f;
+    [SerializeField] private int _lives = 3;
 
     private float _canFire = 0f;
-
-    [SerializeField]
-    private int _lives = 3;
-
+    private AudioSource _audioSource;
     private SpawnManager _spawnManager;
     private UIManager _uiManager;
     private bool _isTripleShotActive = false;
     private bool _isSpeedBoostActive = false;
     private bool _isShieldActive = false;
 
-    [SerializeField]
-    private int _score = 0;
-
+    [SerializeField] private int _score = 0;
     
-    // Start is called before the first frame update
-    void Start()
+    void Start() // Start is called before the first frame update
     {
         transform.position = new Vector3(0, 0, 0);
         _spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
@@ -71,8 +55,7 @@ public class Player : MonoBehaviour
         _fireDamageRight.SetActive(false);
     }
 
-    // Update is called once per frame
-    void Update()
+    void Update() // Update is called once per frame
     {
         CalculateMoviment();
 
@@ -118,7 +101,6 @@ public class Player : MonoBehaviour
             transform.position = new Vector3(11.3f, transform.position.y, 0);
         }
     }
-
     void FireLaser()
     {
         _canFire = Time.time + _fireRate;
@@ -134,7 +116,6 @@ public class Player : MonoBehaviour
 
         _audioSource.Play();
     }
-
     public void Damage()
     {
         if (_isShieldActive == true)
@@ -166,45 +147,34 @@ public class Player : MonoBehaviour
             Destroy(this.gameObject, 0.3f); 
         }
     }
-
-    // triple Shot Behaviour 
-    public void TripleShotActive()
+    public void TripleShotActive() // triple Shot Behaviour
     {
         _isTripleShotActive = true;
         StartCoroutine(TripleShotRoutine());
     }
-
     IEnumerator TripleShotRoutine()
     {
         yield return new WaitForSeconds(5.0f);
         _isTripleShotActive = false;
     }
-
-    // Speed Boost Behaviour
-    public void SpeedBoostActive()
+    public void SpeedBoostActive() // Speed Boost Behaviour
     {
         _isSpeedBoostActive = true;
         StartCoroutine(SpeedBoostRoutine());
     }
-
     IEnumerator SpeedBoostRoutine()
     { 
         yield return new WaitForSeconds(5.0f);
         _isSpeedBoostActive = false;
     }
-
-    // Shield Powerup Behaviour
-    public void ShieldActive()
+    public void ShieldActive() // Shield Powerup Behaviour
     {
         _isShieldActive = true;
         _shieldsVisualizer.SetActive(true);
     }
-
-    
     public void AddingPointsToScore() // Create a method to add 10 points to the score!
     {
         _score = _score + 10;
         _uiManager.UpdateScore(_score); // Communicate to the UI script to update the score!
-
     }
 }

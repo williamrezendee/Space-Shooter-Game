@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField]
-    private float _speed = 4.0f;
+    [SerializeField] private float _speed = 4.0f;
+
     private Player _player;
     private Animator _explosionAnim;
     private Collider2D _collider2D;
     private AudioSource _explosionAudio;
 
-    
     void Start() // Update is called once per frame
     {
         _player = GameObject.Find("Player").GetComponent<Player>();

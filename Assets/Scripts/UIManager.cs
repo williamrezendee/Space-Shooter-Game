@@ -7,30 +7,22 @@ using UnityEngine.SceneManagement;
 public class UIManager : MonoBehaviour
 {
     // handle to Text
-    [SerializeField]
-    private Text _scoreText;
-    [SerializeField]
-    private Image _livesImg;
-    [SerializeField]
-    private Sprite[] _liveSprites;
-    [SerializeField]
-    private Text _gameOverText;
-    [SerializeField]
-    private Text _restartText;
-    [SerializeField]
-    private Button _mainMenuButton;
+    [SerializeField] private Text _scoreText;
+    [SerializeField] private Image _livesImg;
+    [SerializeField] private Sprite[] _liveSprites;
+    [SerializeField] private Text _gameOverText;
+    [SerializeField] private Text _restartText;
+    [SerializeField] private Button _mainMenuButton;
+
     private Scene _scene;
     private bool _isPLayerDeath;
 
-    
-    // Start is called before the first frame update
-    void Start()
+    void Start() // Start is called before the first frame update
     {
         _scoreText.text = "Score: " + 0;
         _gameOverText.gameObject.SetActive(false);
         _restartText.gameObject.SetActive(false);
         _mainMenuButton.gameObject.SetActive(false);
-
         _scene = SceneManager.GetActiveScene();
     }
 
@@ -41,7 +33,6 @@ public class UIManager : MonoBehaviour
             SceneManager.LoadScene(1);
         }
     }
-
 
     public void UpdateScore(int playerScore)
     {

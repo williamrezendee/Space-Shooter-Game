@@ -4,20 +4,15 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject _enemyPrefab;
-    [SerializeField]
-    private GameObject[] _powerUps;
-    [SerializeField]
-    private GameObject _enemyContainer;
-    [SerializeField]
-    private GameObject _powerUpContainer;
+    [SerializeField] private GameObject _enemyPrefab;
+    [SerializeField] private GameObject[] _powerUps;
+    [SerializeField] private GameObject _enemyContainer;
+    [SerializeField] private GameObject _powerUpContainer;
 
     private Vector3 _positionToSpawn;
     private bool _stopSpawning = false;
     
-    // Start is called before the first frame update
-    void Start()
+    void Start() // Start is called before the first frame update
     {
         _positionToSpawn = new Vector3(Random.Range(-9.0f, 9.0f), 7.0f, 0);
     }
@@ -28,7 +23,7 @@ public class SpawnManager : MonoBehaviour
         StartCoroutine(SpawnPowerupRoutine());
     }
 
-    IEnumerator SpawnEnemyRoutine()
+    IEnumerator SpawnEnemyRoutine() // This method is responsible for instantiate the Enemy Prefab
     {
         yield return new WaitForSeconds(3.0f);
         while (_stopSpawning == false)
@@ -39,7 +34,7 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    IEnumerator SpawnPowerupRoutine()
+    IEnumerator SpawnPowerupRoutine() // This method is responsible for instantiate the TripleShot Prefab
     {
         yield return new WaitForSeconds(3.0f);
         while (_stopSpawning == false)
